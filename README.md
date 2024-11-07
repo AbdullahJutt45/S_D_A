@@ -70,11 +70,11 @@ In the **Online Book Store** application, the **OnlineBookStoreUI** class acts a
 
 The `OnlineBookStoreUI` class is responsible for:
 - Capturing user input (like customer name, email, book selection, and quantity).
-https://github.com/user-attachments/assets/18695395-4341-49a6-9b2e-d012b68af1db
+
 
 - Validating the inputs and ensuring that they are correct (for example, checking if the quantity is a valid number).
 - Calling appropriate business logic in the `OrderService` to process the order.
 - Managing the flow of control between the user interface (UI) and the core logic (order processing and total calculation).
 
-
+https://github.com/user-attachments/assets/18695395-4341-49a6-9b2e-d012b68af1db
 
