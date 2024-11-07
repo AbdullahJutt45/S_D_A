@@ -44,40 +44,35 @@ The class diagram depicts the structure of the Online Book Store system. Key cla
 ### **Use Case: Place Order**
 In the `OnlineBookStoreUI` class, I have implemented the "Place Order" use case, where the user inputs their details and order information. The `OrderService` class is responsible for calculating the total price, and the system communicates with the database via the `DatabaseConnection` class to store the order.
 
-#### Code for Placing Order
+# Online Book Store
 
-```java
-private void placeOrder() {
-    String name = nameField.getText().trim();
-    String email = emailField.getText().trim();
-    String selectedBook = (String) bookComboBox.getSelectedItem();
-    int quantity;
+This project is an **Online Book Store** application where customers can browse books, make orders, and view order details. It implements key **Object-Oriented Design Principles** including **GRASP** principles to maintain good design and flexibility.
 
-    // Parse and validate quantity
-    try {
-        quantity = Integer.parseInt(quantityField.getText().trim());
-        if (quantity <= 0) throw new NumberFormatException();
-    } catch (NumberFormatException ex) {
-        JOptionPane.showMessageDialog(this, "Please enter a valid quantity greater than 0.", "Input Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
+## Key GRASP Principle Applied: **Controller**
 
-    // Create Customer and Book objects based on user input
-    Book book = new Book(selectedBook, 50.0);
-    Customer customer = new Customer(name, email);
-    Order order = new Order(customer, book, quantity);
+In this project, we applied the **Controller** principle from **GRASP** to manage the flow of user input and interaction with the system. Here's how this principle is used and why it's important for our Online Book Store project.
 
-    // Database connection and order placement
-    DatabaseConnection dbConnection = new DatabaseConnection();
-    dbConnection.connect();
-    orderService.placeOrder(order);
-    dbConnection.disconnect();
+### **GRASP Controller Principle**
 
-    // Calculate and display the total price
-    double total = order.calculateTotal();
-    totalLabel.setText("Total: $" + total);
-    
-    // Show a confirmation message
-    String confirmationMessage = String.format("Thank you, %s! Your order has been placed successfully. Total Price: $%.2f", name, total);
-    JOptionPane.showMessageDialog(this, confirmationMessage, "Order Confirmation", JOptionPane.INFORMATION_MESSAGE);
-}
+The **Controller** pattern assigns the responsibility of handling system events (such as user interactions) to a class, often referred to as the **Controller**. This class is responsible for managing the flow of control between the user interface and the underlying business logic. 
+
+The **Controller** acts as an intermediary between the UI (view) and the core functionality of the application (model). By using the **Controller** principle, we can ensure the following:
+
+1. **Separation of Concerns**: The **Controller** isolates the user interface (UI) from the business logic, making the application easier to maintain and extend.
+2. **Centralized Event Handling**: It consolidates the handling of events like button clicks, form submissions, and other user actions.
+3. **Modularity**: The **Controller** is modular, so it's easier to change the UI without affecting the underlying business logic, and vice versa.
+
+### **How the Controller Principle is Applied in Our Project**
+
+In the **Online Book Store** application, the **OnlineBookStoreUI** class acts as the **Controller**.
+
+#### **Controller Class: OnlineBookStoreUI**
+
+The `OnlineBookStoreUI` class is responsible for:
+- Capturing user input (like customer name, email, book selection, and quantity).
+- Validating the inputs and ensuring that they are correct (for example, checking if the quantity is a valid number).
+- Calling appropriate business logic in the `OrderService` to process the order.
+- Managing the flow of control between the user interface (UI) and the core logic (order processing and total calculation).
+
+
+
